@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Medicine Reminder System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+        }
+        #message {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Medicine Reminder System</h2>
+
+    <input type="text" id="medicine" placeholder="Medicine Name">
+    <input type="time" id="time">
+    <button onclick="setReminder()">Set Reminder</button>
+
+    <p id="message"></p>
+
+    <script>
+        function setReminder() {
+            let medicine = document.getElementById("medicine").value;
+            let reminderTime = document.getElementById("time").value;
+
+            if (medicine === "" || reminderTime === "") {
+                alert("Please enter medicine name and time.");
+                return;
+            }
+
+            document.getElementById("message").innerHTML =
+                "Reminder set for " + medicine + " at " + reminderTime;
+
+            setInterval(function() {
+                let now = new Date();
+                let currentTime =
+                    now.getHours().toString().padStart(2, '0') + ":" +
+                    now.getMinutes().toString().padStart(2, '0');
+
+                if (currentTime === reminderTime) {
+                    alert("Time to take your medicine: " + medicine);
+                }
+            }, 60000);
+        }
+    </script>
+
+</body>
+</html>
